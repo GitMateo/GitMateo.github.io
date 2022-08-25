@@ -98,8 +98,8 @@
   				color:red;
 			}
 			#spin:after {
-  					content:"";
-  					animation: spin 20s linear infinite;
+  					content:"Welcome";
+  					animation: spin 5s linear infinite;
 			}
 			@keyframes spin {
   					0% { content:"Hi"; }
@@ -112,6 +112,7 @@
   					70% { content:"Asalaam alaikum"; }
   					80% { content:"Konnichiwa"; }
   					90% { content:"Witaj"; }
+					100% {content: "Ahoj";}
 			}
 /* Basic */
 
