@@ -93,7 +93,26 @@
 		-ms-appearance: none;
 		appearance: none;
 	}
-
+/*Greetings animation*/
+	#spin {
+  				color:red;
+			}
+			#spin:after {
+  					content:"";
+  					animation: spin 20s linear infinite;
+			}
+			@keyframes spin {
+  					0% { content:"Hi"; }
+  					10% { content:"Hola"; }
+ 					20% { content:"Bonjour"; }
+  					30% { content:"Guten tag"; }
+  					40% { content:"Salve"; }
+  					50% { content:"Nǐn hǎo"; }
+  					60% { content:"Olá"; }
+  					70% { content:"Asalaam alaikum"; }
+  					80% { content:"Konnichiwa"; }
+  					90% { content:"Witaj"; }
+			}
 /* Basic */
 
 	// Set box model to border-box.
