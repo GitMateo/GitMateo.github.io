@@ -10,6 +10,28 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="docs/assets/css/main.css" />
+		<style>
+						#spin {
+  				color:red;
+			}
+			#spin:after {
+  					content:"Welcome";
+  					animation: spin 5s linear infinite;
+			}
+			@keyframes spin {
+  					0% { content:"Hi"; }
+  					10% { content:"Hola"; }
+ 					20% { content:"Bonjour"; }
+  					30% { content:"Guten tag"; }
+  					40% { content:"Salve"; }
+  					50% { content:"Nǐn hǎo"; }
+  					60% { content:"Olá"; }
+  					70% { content:"Asalaam alaikum"; }
+  					80% { content:"Konnichiwa"; }
+  					90% { content:"Witaj"; }
+					100% {content: "Ahoj";}
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
