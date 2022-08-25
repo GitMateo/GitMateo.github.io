@@ -2630,7 +2630,7 @@ input, select, textarea {
 					margin-top: 0;
 				}
 
-	}
+	
 		/*Greeting animation*/
 			#spin {
   				color:red;
@@ -2651,3 +2651,4 @@ input, select, textarea {
   					80% { content:"Konnichiwa"; }
   					90% { content:"Witaj"; }
 			}
+		}
