@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Sudoku solver vanilla JS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='http://abpetkov.github.io/powerange/dist/powerange.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="center" id="app">
+    <div class="sudoku-grid">
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+        <div class="row">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+            <input class="cell" type="number" maxlength="1" min="1" max="9">
+        </div>
+    </div>
+    <div class="controls">
+        <button class="solve">Solve</button>
+        <button class="reset">Reset</button>
+        <div class="range-wrapper">
+          <div class="range-info">Slow down slider: 5ms</div>
+          <input class="range" style="display: none;">
+      </div>
+    </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js'></script>
+<script src='http://abpetkov.github.io/powerange/dist/powerange.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
