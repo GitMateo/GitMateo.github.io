@@ -1,114 +1,135 @@
-let initialGrid = [
-[5, 1, 7, 6, 0, 0, 0, 3, 4],
-[2, 8, 9, 0, 0, 4, 0, 0, 0],
-[3, 4, 6, 2, 0, 5, 0, 9, 0],
-[6, 0, 2, 0, 0, 0, 0, 1, 0],
-[0, 3, 8, 0, 0, 6, 0, 4, 7],
-[0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 9, 0, 0, 0, 0, 0, 7, 8],
-[7, 0, 3, 4, 0, 0, 5, 6, 0],
-[0, 0, 0, 0, 0, 0, 0, 0, 0]];
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
+const grid = createGrid();
 
-let sudokuCells = [...document.querySelectorAll('.cell')];
+function createGrid(){
 
-function initGrid() {
-  sudokuCells.forEach((cell, index) => {
-    let i = Math.floor(index / 9);
-    let j = index % 9;
+    let grid = [
 
-    if (initialGrid[i][j] !== 0) {
-      cell.value = initialGrid[i][j];
-      cell.setAttribute('disabled', true);
-    } else {
-      cell.value = '';
+        [0, 0, 0, 0, 0, 0, 0, 0 ,0],
+        [0, 0, 0, 0, 0, 0 ,0, 0, 0],
+        [0, 0, 0, 0, 0, 0 ,0, 0, 0],
+    
+        [0, 0, 0, 0, 0, 0 ,0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    
+        [0, 0, 0, 0, 0 ,0, 0, 0, 0],
+        [0, 0 ,0, 0, 0, 0, 0, 0, 0],
+        [0, 0 ,0, 0, 0, 0, 0, 0, 0]
+        
+    ];
+
+    for(let y = 0; y < 9; y++){
+        for(let x = 0; x < 9; x++){
+
+            if(Math.floor(Math.random()*100) >= 80){
+
+                for(let n = 1; n < 10; n++){
+                    if(isPossible(x,y,n,grid)){
+                        grid[y][x] = n;
+                        break;
+                    }
+                }
+            }
+        }
     }
-  });
+
+    return grid;
 }
 
-async function waitFor(ms) {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(), ms);
-  });
-}
+//Deep copy of grid for visualization
+const baseGrid = JSON.parse(JSON.stringify(grid));
 
-function range(start = 0, end = 0) {
-  let length = end - start + 1;
-  return Array.from({ length }, (x, i) => start + i);
-}
+//Recorded steps, used for visualization
+const steps = [];
+updateTable(grid);
 
-function findEmptyCell(grid) {
-  for (let i of range(0, 8))
-  for (let j of range(0, 8))
-  if (grid[i][j] === 0)
-  return { i, j };
+//Returns true or false based on if n fits in the grid at the x,y coordinate of the grid
+function isPossible(x, y, n, grid){
 
-  return { i: -1, j: -1 };
-}
-
-function isValid(grid, i, j, e) {
-  let isRowValid = range(0, 8).every(columnIndex => grid[i][columnIndex] !== e);
-
-  if (isRowValid) {
-    let isColumnValid = range(0, 8).every(rowIndex => grid[rowIndex][j] !== e);
-
-    if (isColumnValid) {
-      let sectorTopX = 3 * Math.floor(i / 3),
-      sectorTopY = 3 * Math.floor(j / 3);
-
-      for (let x of range(sectorTopX, sectorTopX + 2))
-      for (let y of range(sectorTopY, sectorTopY + 2))
-      if (grid[x][y] === e)
-      return false;
-
-      return true;
+    const row = [];
+    const box = [];
+    const boxX = Math.floor(x / 3) * 3;
+    const boxY = Math.floor(y / 3) * 3;
+    
+    for(let i = 0; i < 3; i++){
+        for(let j = 0; j < 3; j++){
+            box.push(grid[boxY+i][boxX+j]);
+        }
     }
-  }
-  return false;
+
+    for(let i = 0; i < 9; i++){row.push(grid[i][x]);}
+
+    return !(grid[y].includes(n) || row.includes(n) || box.flat(Infinity).includes(n));
 }
 
-async function solveSudoku(grid) {
-  let { i, j } = findEmptyCell(grid);
+//Uses backtracking and recursion to find a possible to the sudoku
+function solve(y, x, grid){
 
-  if (i === -1)
-  return true;
-
-  for (let e of range(1, 9)) {
-    if (isValid(grid, i, j, e)) {
-
-      let miliseconds = document.querySelector('.range').value;
-      if (miliseconds > 0) {
-        await waitFor(miliseconds);
-      }
-
-      grid[i][j] = e;
-      sudokuCells[i * 9 + j].value = e;
-
-      if (await solveSudoku(grid)) {
+    if(!grid.flat(Infinity).includes(0)){
         return true;
-      } else {
-        grid[i][j] = 0;
-        sudokuCells[i * 9 + j].value = '';
-      }
     }
-  }
 
-  return false;
+    let nextX = (1+x)%9;
+    let nextY = nextX < x ? y+1 : y;
+
+    if(grid[y][x] != 0){
+        return solve(nextY, nextX, grid);
+    }
+    for(let n = 1; n < 10; n++){
+
+        if(isPossible(x, y, n, grid)){
+            grid[y][x] = n;
+            steps.push({x,y,n});
+
+            if(solve(nextY,nextX, grid)){
+                return true;
+            }
+        }
+        grid[y][x] = 0;
+    }
+
+    steps.push({x,y,n:0});
+    return false;
+}
+solve(0,0,grid);
+
+//DOM manipulation
+function updateTable(grid){
+
+    for(let tr = 0; tr < 9; tr++){
+        for(let td = 0; td < 9; td++){
+            document.querySelector(`tbody:nth-of-type(${Math.ceil((tr+1)/3)}) > tr:nth-child(${tr%3+1}) > td:nth-child(${td+1})`).textContent = grid[tr][td]==0?"":grid[tr][td];
+        }
+    }
 }
 
-initGrid();
-
-document.querySelector('.solve').addEventListener('click', () => {
-  initGrid();
-  solveSudoku(_.cloneDeep(initialGrid));
-});
-document.querySelector('.reset').addEventListener('click', () => {
-  initGrid();
-});
 
 
-let rangeElement = document.querySelector('.range');
-new Powerange(rangeElement, { max: 50, start: 5 });
-rangeElement.onchange = () => {
-  document.querySelector('.range-info').innerHTML = `Slow down slider: ${rangeElement.value}ms`;
-};
+//To help visualize
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+//Using the baseGrid and steps, we can now slowly add steps to the baseGrid and show what was happening
+async function visualize(){
+
+    const speed = (_ =>{
+    
+        let temp = -1;
+        do{
+            temp = prompt("Speed of visualization? (in ms)");
+        }while(temp <= 0 || isNaN(temp) || temp> 2000);
+        return temp;
+    })();
+    while(steps[0]){
+        const step = steps.shift();
+        baseGrid[step.y][step.x] = step.n;
+        updateTable(baseGrid);
+        await sleep(speed);
+    }
+}
+

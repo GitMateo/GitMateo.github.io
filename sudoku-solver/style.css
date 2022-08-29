@@ -1,107 +1,36 @@
-* {
-  box-sizing: border-box;
+html, body{
+  height: 100%;
 }
-body {
-  background-color: #eee;
+html > body > *:not(button){
+  color:white;
 }
-.center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-}
-@media (max-width: 480px) {
-  .center {
-    transform: scale(0.7);
-  }
-}
-@media (max-height: 480px) {
-  .center {
-    transform: scale(0.7);
-  }
-}
-@media (max-width: 350px) {
-  .center {
-    transform: scale(0.6);
-  }
-}
-@media (max-height: 350px) {
-  .center {
-    transform: scale(0.6);
-  }
-}
-.sudoku-grid {
-  margin: 20px 0;
-}
-.row {
-  font-size: 0;
-  width: 483px;
-}
-.row:first-child .cell {
-  border-top: 2px solid #000;
-}
-.row:nth-child(3n) .cell {
-  border-bottom: 2px solid #000;
-}
-.cell {
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  font-size: 40px;
-  border-top: 0;
-  border-left: 0;
-  border-right: 1px solid #777;
-  border-bottom: 1px solid #777;
-  font-family: 'Open Sans', sans-serif;
-  outline: none;
-  -moz-appearance: textfield;
-}
-.cell:disabled {
-  color: #555;
-  background-color: #f1f1f1;
-}
-.cell:first-child {
-  border-left: 2px solid #000;
-}
-.cell:nth-child(3n) {
-  border-right: 2px solid #000;
-}
-.cell::-webkit-inner-spin-button,
-.cell::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+body{
+  background-color: #181A1B;
   margin: 0;
-}
-.controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  flex-direction: column;
 }
-button {
-  margin: 0.5em;
-  padding: 0.5em 1.3em 0.5em;
-  border: 1px solid #777;
-  outline: 0;
-  border-radius: 5px;
-  background-color: #fff;
-  font-size: 16px;
-  color: #333;
-  cursor: pointer;
+table{ 
+  border-collapse: collapse;
+  font-family: Calibri, sans-serif;
+  margin: auto;
 }
-button:active {
-  transform: scale(0.96);
+colgroup, tbody{ 
+  border: solid medium;
 }
-.range-wrapper {
-  position: relative;
-  top: -15px;
-  display: inline-block;
-  width: 200px;
-  margin: 5px 30px;
-  vertical-align: text-bottom;
+td{
+  font-size: 50px;
+  border: solid thin;
+  height: 1.4em;
+  width: 1.4em;
   text-align: center;
+  padding: 0; 
 }
-.range-wrapper .range-info {
-  margin: 15px;
+button{
+  margin:2.5% auto 2.5% auto;
+  font-size: 40px;
+  width: 300px;
+  height: 100px;
 }
