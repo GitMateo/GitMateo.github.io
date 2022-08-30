@@ -1790,6 +1790,10 @@ input, select, textarea {
 				margin: 0 auto;
 				width: auto;
 			}
+		.image.preview {
+			width: 260px;
+			height: 345px;
+		}
 
 /* List */
 
