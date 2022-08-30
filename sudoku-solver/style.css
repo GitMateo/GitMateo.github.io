@@ -2,10 +2,10 @@ html, body{
   height: 100%;
 }
 html > body > *:not(button){
-  color:white;
+  color:#F49F1C;
 }
 body{
-  background-color: #181A1B;
+  background-color: #030E4F;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -33,16 +33,9 @@ button{
   font-size: 40px;
   width: 300px;
   height: 100px;
+  background-color:#F49F1C;
+  color:#030E4F;
 }
-.container {
-  height: 200px;
-  position: relative;
-  border: 3px solid green;
-}
-.center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 800px;
-  border: 3px solid green; 
+button:hover {
+  color:red;
 }
