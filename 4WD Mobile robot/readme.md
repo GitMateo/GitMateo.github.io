@@ -1,4 +1,4 @@
-Projekt skłąda się z aplikacji stworzonej na arduino oraz aplikacji stworzonej na urządzenie 
+Projekt składa się z aplikacji stworzonej na arduino oraz aplikacji stworzonej na urządzenie 
 mobilne z systemem android w celu sterowania robotem
 
 
